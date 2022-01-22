@@ -1,0 +1,50 @@
+{{>userNavbar}}
+<Section class="Profile">
+    <div class="doctorprof">
+        <div class="profimg">
+            <img class="profimg" src={{data.image}} alt="">
+        </div>
+        <h1>Name : {{data.fullname}}</h1>
+        <h1>Email : {{data.email}}</h1>
+        <h1>speciality : {{data.speciality}}</h1>
+        <h1>Qualification : {{data.qualification}}</h1>
+        <h1>Experience : {{data.experience}}</h1>
+        <h1>Address : {{data.address}}</h1>
+        <h1>Consultation fee : 100 &#8377 </h1>
+        {{!-- <h1> Pay Before consultation : <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_HbwHg9k8asH79s" async> </script> </form></h1> --}}
+        <h1>Pay Before consultation : <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_IlxWPvlUdDfxDQ" async> </script> </form></h1>
+    </div>
+
+    <div class="connection-box">
+    {{#if notConnected}}
+    <form class="Aconnect" action="/connReqUser" method="post">
+        <input type="hidden" value="{{data.email}}" name="dremail">
+        <button type="submit"  id="connect">Connect For Physical Appointment</button>
+    </form>
+    {{/if}}
+    {{#if reqSent}}
+    {{!-- <form action="/connectToDoctor?email={{data.email}}" method="post"> --}}
+        <button class="Aconnect" >Connection Request Sent</button>
+    {{!-- </form> --}}
+    {{/if}}
+    {{#if connected}}
+    <button class="Aconnect">Appointment Request Accepted</button>
+    {{/if}}
+
+    {{#if vNotConnect}}
+    <form id="VC-req" class="Aconnect" action="/connReqUserVC" method="post">
+        <input type="hidden" value="{{data.email}}" name="dremail">
+        <button type="submit" id="Vconnect">Connect For Video Consultancy</button>
+    </form>
+    {{/if}}
+
+    {{#if vReqSent}}
+    <button class="Aconnect" >Connection Request Sent</button>
+    {{/if}}
+
+    {{#if vConnected}}
+    <button class="Aconnect">Video Call Request Accepted</button>
+    {{/if}}
+    </div>
+</Section>
+{{>footer}}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WeCare</title>
+  
+  <!-- font awesome cdn link  -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
+ 
+
+  <!-- custom css file link  -->
+  <link rel="stylesheet" href="css/style.css">
+   
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+  {{!-- Bootstrap --}}
+  {{!--
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> --}}
+
+
+  {{!--
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> --}}
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+  <!-- header section starts  -->
+
+  <header class="header">
+
+    <a href="/" > <img class="logo" src="image/weCareLogo.png" </a>
+
+    <nav class="navbar">
+      <a href="/">home</a>
+        
+        <a href="/covid">Covid Prevention</a>
+      {{#if showUserNav}} 
+      <a href="/drList">Book Appointment</a>
+      <a href="https://www.srlworld.com/" target="_blank">Book Test</a>
+      <a href="/buymedicine">Medicine Info</a>
+      {{/if}}
+
+
+        {{#if normalNav}} 
+      <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</a>
+      {{/if}}
+
+    {{#if showUserNav}} 
+      <a class="get-started" href="/userdashboard">Welcome {{name}}</a>
+      <a href="/logout">Logout</a>
+      {{/if}}
+
+    {{#if showDrNav}} 
+      <a class="get-started" href="/drdashboard">Welcome {{name}}</a>
+      <a href="/logout">Logout</a>
+      {{/if}}
+    </nav>
+
+
+    <div id="id01" class="modal">
+
+      <form class="modal-content animate" action="/login" method="post">
+
+        <div class="container">
+          {{#if messages.error}}
+              <script>
+                var modalL = document.getElementById('id01');
+                modalL.style.display = "block";
+              </script>
+              <div style="text-align:center ;color:red;">{{messages.error}} </div>
+              
+          {{/if}}
+          <label for="email"><b>Email</b></label>
+          <input class="details" type="email" id="email" placeholder="example@gmail.com" name="email" required>
+          <label for="password"><b>Password</b></label>
+          <input class="details" type="password" id="password" placeholder="Enter Password" name="password" required>
+          
+          <button type="submit">Login</button>
+          
+          <a href="#" class="reglog" onclick="reg()" style="width:auto;">Register</a>
+          
+        </div>
+
+
+      </form>
+    </div>
+
+    <div id="id02" class="modal">
+
+      <form id="register" class="modal-content animate" enctype="multipart/form-data">
+        
+        <p id="message"></p>
+        <div class="container">
+          <label for="name"><b>Name</b></label>
+          <input class="details"  placeholder="Enter your name" type="text" id="name" name="name-reg" required>
+
+          <label for="email"><b>Email</b></label>
+          <input class="details" type="email" id="email" placeholder="example@gmail.com" name="email-reg" required>
+
+          <label for="password"><b>Password</b></label>
+          <input class="details" type="password" id="password" placeholder="Enter Password" name="password-reg"    required>
+
+          <label for="password"><b>Confirm Password</b></label>
+          <input class="details" type="password" id="password" placeholder="Enter Password" name="cpassword-reg" required>
+
+          <label><input id="checking" type = "checkbox" onchange = "check(this)"><b>Are You A Doctor?</b></label><br><br>
+
+          <label for="qualification" class="drdetails"><b>Qualification</b></label>
+          <input class="details drdetails" name="qualification"  placeholder="Degree? MBBS/MD..etc" type="text" >
+          
+          <label for="experience" class="drdetails" ><b>Experience</b></label>
+          <input name="experience" class="details drdetails" type="text" placeholder="Years of Experience"  >
+
+          <label for="address" class="drdetails" ><b>address</b></label>
+          <input name="address" class="details drdetails" type="text" placeholder="Visit Address"  >
+
+          <label for="formFile" class="drdetails" ><b>Cerificate of Highest degree</b></label>
+          <input name="file" class="details drdetails" type="file" id="formFile">
+
+          <button id="btn-reg" type="submit">Register</button>
+          
+            <a href="#" class="reglog" onclick="log()" style="width:auto;">Login</a>
+            {{!-- <a href="#" class="reglog1" onclick="regDr()" style="width:auto;">DR Register</a> --}}
+          
+        </div>
+
+
+      </form>
+    </div>
+   
+    <div id="menu-btn" class="fas fa-bars"></div>
+
+  </header>
